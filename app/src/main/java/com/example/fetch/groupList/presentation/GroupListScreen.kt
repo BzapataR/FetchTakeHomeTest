@@ -113,7 +113,7 @@ fun GroupListRoot(
         )
     }
 }
-@Preview
+@Preview(device = "id:pixel_5", showSystemUi = false, showBackground = false)
 @Composable
 fun GroupListScreenPreview() {
 
