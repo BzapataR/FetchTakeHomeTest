@@ -1,10 +1,9 @@
 package com.example.fetch.groupList.data.network
 
-import android.util.Log
 import com.example.fetch.core.data.safeCall
 import com.example.fetch.core.domain.DataError
 import com.example.fetch.core.domain.Result
-import com.example.fetch.groupList.data.ResultsDto
+import com.example.fetch.groupList.data.Dto.ResultsDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

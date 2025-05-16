@@ -4,7 +4,7 @@ import com.example.fetch.core.domain.DataError
 import com.example.fetch.core.domain.Result
 import com.example.fetch.core.domain.map
 import com.example.fetch.groupList.data.network.RemoteListSource
-import com.example.fetch.groupList.data.toGroupListItem
+import com.example.fetch.groupList.data.mappers.toGroupListItem
 import com.example.fetch.groupList.domain.DataRepository
 import com.example.fetch.groupList.domain.GroupListItem
 

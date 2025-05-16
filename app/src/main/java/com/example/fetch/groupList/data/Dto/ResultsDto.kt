@@ -1,4 +1,4 @@
-package com.example.fetch.groupList.data
+package com.example.fetch.groupList.data.Dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

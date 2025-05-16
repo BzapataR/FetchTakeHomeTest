@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fetch.core.domain.onError
 import com.example.fetch.core.domain.onSuccess
+import com.example.fetch.groupList.domain.DataManipulations
 import com.example.fetch.groupList.domain.DataRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SelectedGroupListViewModel(
-    private val repository: DataRepository
+    private val repository: DataRepository,
+    private val manipulations: DataManipulations
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GroupListState())
@@ -36,14 +38,14 @@ class SelectedGroupListViewModel(
         repository.searchApi()
             .onSuccess { results ->
                 _state.update {
-                    val uniqueGroupIds = results.map { it.listId }.toSet().toList().sorted()
+                    val uniqueGroupIds = manipulations.uniqueGroupIds(results)//results.map { it.listId }.toSet().toList().sorted()
                     val initialSelectedGroupIndex = uniqueGroupIds.associateWith { false }
                     it.copy(
                         isLoading = false,
                         errorMessage = null,
                         groupList = results,
-                        filteredGroupList = results.filter { !it.name.isNullOrBlank()}.sortedBy { it.id },
-                        groups = results.map {it.listId}.toSet().toList().sorted(),
+                        filteredGroupList = manipulations.filterGroupList(results),//results.filter { !it.name.isNullOrBlank()}.sortedBy { it.id },
+                        groups = manipulations.getGroupCount(results),//results.map {it.listId}.toSet().toList().sorted(),
                         selectedGroupIndex = initialSelectedGroupIndex
                     )
                 }
